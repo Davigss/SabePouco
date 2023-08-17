@@ -25,5 +25,8 @@
         <property name="hibernate.dbcp.minIdle">5</property>
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
         <mapping class="entity.Pessoa" />
+        <mapping class="entity.Endereco" />
+        <mapping class="entity.Pedido" />
+        <mapping class="entity.Produto" />
     </session-factory>
 </hibernate-configuration>

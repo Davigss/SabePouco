@@ -3,8 +3,8 @@ package entity;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "pessoa")
+@Entity(name = "pessoa")
+@Table
 public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,10 +17,15 @@ public class Pessoa {
     @Column
     private String email;
 
-    public Pessoa(String primeiroNome, String sobrenome, String email) {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+
+    public Pessoa(String primeiroNome, String sobrenome, String email, Endereco endereco) {
         this.primeiroNome = primeiroNome;
         this.sobrenome = sobrenome;
         this.email = email;
+        this.endereco = endereco;
     }
 
     public int getId() {
@@ -55,6 +60,14 @@ public class Pessoa {
         this.email = email;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
     @Override
     public String toString() {
         return "Pessoa{" +
@@ -62,6 +75,8 @@ public class Pessoa {
                 ", primeiroNome='" + primeiroNome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
                 ", email='" + email + '\'' +
+                ", endereco=" + endereco +
                 '}';
     }
 }
+
